@@ -1,0 +1,30 @@
+name: 'Netlify Frontend Deploy'
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/ci-cd.yaml"
+      - "./"
+  push:
+    paths:
+      - ".github/workflows/ci-cd.yaml"
+      - "./"
+      branches: [ main ]
+
+jobs:
+  Netlify-ci-cd:
+    runs-on: ubuntu-latest
+
+    env:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+    steps:
+      - uses: actions/checkput@v2
+      - name: Build
+        run: |
+          npm install
+          npm run build
+          npx netlify-cli deploy --dir=public --prod
+
+

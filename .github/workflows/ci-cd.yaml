@@ -2,13 +2,13 @@ name: 'Netlify Frontend Deploy'
 
 on:
   pull_request:
-    paths:
-      - ".github/workflows/ci-cd.yaml"
-      - "./"
+      paths:
+        - ".github/workflows/ci-cd.yaml"
+        - "./"
   push:
-    paths:
-      - ".github/workflows/ci-cd.yaml"
-      - "./"
+      paths:
+        - ".github/workflows/ci-cd.yaml"
+        - "./"
       branches: [ main ]
 
 jobs:
@@ -26,5 +26,3 @@ jobs:
           npm install
           npm run build
           npx netlify-cli deploy --dir=public --prod
-
-
